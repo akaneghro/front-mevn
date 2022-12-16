@@ -1,7 +1,7 @@
 <template>
   <q-page padding class="row justify-center">
     <div class="col-12 col-sm-6">
-      <h3>Login</h3>
+      <h3>Register</h3>
       <q-form @submit.prevent="handleSubmit">
         <q-input
           v-model="email"
@@ -25,6 +25,16 @@
           ]"
         >
         </q-input>
+        <q-input
+          v-model="repassword"
+          type="password"
+          label="Repita contraseña"
+          :rules="[
+            (val) =>
+              (val && val === password) || 'No coinciden las contraseñas',
+          ]"
+        >
+        </q-input>
         <div>
           <q-btn label="Login" type="submit"></q-btn>
         </div>
@@ -45,12 +55,13 @@ const router = useRouter();
 
 const $q = useQuasar();
 
-const email = ref("alberto4@test.com");
-const password = ref("123123");
+const email = ref("");
+const password = ref("");
+const repassword = ref("");
 
 const handleSubmit = async () => {
   try {
-    await userStore.access(email.value, password.value);
+    await userStore.register(email.value, password.value, repassword.value);
     router.push("/");
     email.value = "";
     password.value = "";
