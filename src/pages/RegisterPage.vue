@@ -36,7 +36,7 @@
         >
         </q-input>
         <div>
-          <q-btn label="Login" type="submit"></q-btn>
+          <q-btn type="submit">Registrar</q-btn>
         </div>
       </q-form>
     </div>

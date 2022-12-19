@@ -1,33 +1,16 @@
 <template>
   <q-page padding>
-    <q-btn @click="createLink">Crear Link</q-btn>
-    {{ userStore.token }} - {{ userStore.expiresIn }}
+    <AddLink></AddLink>
+    <div v-for="link in useLink.links" :key="link._id">
+      <LinkCard></LinkCard>
+    </div>
   </q-page>
 </template>
 
 <script setup>
-import { api } from "src/boot/axios";
-import { useUserStore } from "../stores/user-store";
+import { useLinkStore } from "src/stores/link-store";
+import AddLink from "src/components/AddLink.vue";
+import LinkCard from "src/components/LinkCard.vue";
 
-const userStore = useUserStore();
-
-//userStore.refreshToken();
-
-const createLink = async () => {
-  try {
-    const res = await api({
-      method: "POST",
-      url: "/links",
-      headers: {
-        Authorization: "Bearer " + token.value,
-      },
-      data: {
-        longLink: "https://quasar.dev/",
-      },
-    });
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
+const useLink = useLinkStore();
 </script>
