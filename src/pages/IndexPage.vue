@@ -2,7 +2,7 @@
   <q-page padding>
     <AddLink></AddLink>
     <div v-for="link in useLink.links" :key="link._id">
-      <LinkCard></LinkCard>
+      <LinkCard :link="link"></LinkCard>
     </div>
   </q-page>
 </template>
